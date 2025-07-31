@@ -1,0 +1,26 @@
+{
+  "name": "VibeChatz",
+  "short_name": "VibeChatz",
+  "description": "A simple chat application using Firebase Realtime Database and Supabase Storage.",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#e9ecef",
+  "theme_color": "#28a745",
+  "icons": [
+    {
+      "src": "",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "",
+      "sizes": "800x800",
+      "type": "image/png"
+    }
+  ]
+}

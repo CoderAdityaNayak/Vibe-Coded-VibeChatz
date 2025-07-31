@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to VibeChatz</title>
+    <link rel="icon" href="https://example.com/path/to/your/icon.png" type="image/png">
+    <meta name="theme-color" content="#2196F3">
+    <link rel="manifest" href="/manifest.json">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Body and Container Styling */
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: #2b2e3a; /* Dark background for neon effect */
+            margin: 0;
+            padding: 20px;
+            color: #ecf0f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        #welcome-container {
+            background: rgba(44, 47, 58, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+
+        /* Logo Placeholder */
+        #logo-placeholder img {
+            width: 100px;
+            height: 100px;
+            border-radius: 25px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Welcome Message */
+        #welcome-message {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #ecf0f1;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            text-shadow: 0 0 10px #3498db;
+        }
+
+        #tagline {
+            font-size: 1.1em;
+            color: #bdc3c7;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        /* Neon Login Button */
+        #login-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 8px #fff, 0 0 10px #fff, 0 0 12px #3498db;
+            box-shadow: 0 0 5px #3498db, 0 0 10px #3498db, 0 0 15px #3498db;
+            animation: pulse-neon 2s infinite alternate;
+        }
+        #login-btn:hover {
+            background-color: #2980b9;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db, 0 0 40px #3498db;
+            animation: none;
+        }
+        #login-btn:active {
+            background-color: #256598;
+            transform: scale(1);
+        }
+
+        @keyframes pulse-neon {
+            from {
+                box-shadow: 0 0 5px #3498db, 0 0 10px #3498db, 0 0 15px #3498db;
+            }
+            to {
+                box-shadow: 0 0 10px #3498db, 0 0 20px #3498db, 0 0 30px #3498db;
+            }
+        }
+
+        /* Small Info Line */
+        #info-line {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 20px;
+            font-style: italic;
+        }
+
+        /* --- Modal Styles --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            color: #6c757d;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            text-align: left;
+            font-size: 0.95em;
+        }
+
+        /* Name Options Styling */
+        #name-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .name-option {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        .name-option:hover {
+            background-color: #dee2e6;
+            transform: translateY(-2px);
+        }
+        .name-option.selected {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .modal-content input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .modal-content input[type="text"]:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+        
+        #name-modal .error-message {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            height: 1.2em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #name-modal .error-message.show {
+            opacity: 1;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .modal-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .modal-btn.confirm-btn {
+            background-color: #007bff;
+            color: white;
+        }
+        .modal-btn.confirm-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+        .modal-btn.confirm-btn:active {
+            background-color: #004085;
+            transform: translateY(0);
+        }
+
+        .modal-btn.cancel-btn {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        .modal-btn.cancel-btn:hover {
+            background-color: #dee2e6;
+            transform: translateY(-1px);
+        }
+        .modal-btn.cancel-btn:active {
+            background-color: #ced4da;
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            #welcome-container {
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: none;
+            }
+            #welcome-message {
+                font-size: 2em;
+            }
+            #tagline {
+                font-size: 1em;
+            }
+            .modal-content {
+                padding: 20px;
+            }
+            .modal-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .modal-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="welcome-container">
+    <div id="logo-placeholder">
+        VC </div>
+    <h1 id="welcome-message">Hello User,<br>Welcome to VibeChatz.</h1>
+    <p id="tagline">Your private space for seamless communication.</p>
+    <button id="login-btn">Log-In</button>
+    <p id="info-line">This is a one-time thing only, don't worry.</p>
+</div>
+
+<div id="name-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Please Enter Your Name</h3>
+        <p>This name will be stored locally for a seamless experience.</p>
+        
+        <div id="name-options">
+            <div class="name-option">Daniel Morris</div>
+            <div class="name-option">Ramesh Kamath</div>
+            <div class="name-option">Ria Dzouza</div>
+            <div class="name-option">Sum Ting Wong </div>
+            <div class="name-option">Cris P. Bacon</div>
+        </div>
+
+        <input type="text" id="username-input" placeholder="Your Name" autocomplete="name">
+        <div class="error-message" id="name-error"></div>
+        <div class="modal-buttons">
+            <button class="modal-btn cancel-btn" id="cancel-name-modal">Cancel</button>
+            <button class="modal-btn confirm-btn" id="confirm-name-modal">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<div id="terms-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Terms and Conditions</h3>
+        <p>📄 Terms and Conditions<br>
+Welcome to VibeChatz!<br>
+This web app is built purely for educational and experimental purposes. By using this platform, you agree to the following:
+<br>
+✅ Usage Rules:<br><br>
+This chat is public and unencrypted — anyone can read your messages.<br>
+<br>
+Do not upload or share any content that is:<br>
+<br>
+Illegal<br>
+<br>
+NSFW / 18+ / adult content<br>
+<br>
+Hateful, abusive, or discriminatory<br>
+<br>
+Avoid sharing personal information such as phone numbers, passwords, or sensitive data.<br>
+<br><hr>
+⚠️ Disclaimer:<br>
+This app does not guarantee privacy, encryption, or message security.<br>
+<br>
+Uploaded media is stored on a public bucket and may be accessible to others.<br>
+<br>
+The developer is not responsible for any content shared or consequences arising from the usage of this app.<br>
+<br><hr>
+💡 Educational Use Only:<br>
+This app was made to explore technologies like Firebase, Supabase, and PWA deployment.<br>
+If you're using this, you're part of an experimental tech showcase, not a secure communication tool.</p><br><br>
+        <div class="modal-buttons">
+            <button class="modal-btn confirm-btn" id="accept-terms-modal">Okay, I Understand</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const loginBtn = document.getElementById('login-btn');
+    const nameModal = document.getElementById('name-modal');
+    const usernameInput = document.getElementById('username-input');
+    const nameError = document.getElementById('name-error');
+    const confirmNameModalBtn = document.getElementById('confirm-name-modal');
+    const cancelNameModalBtn = document.getElementById('cancel-name-modal');
+    const termsModal = document.getElementById('terms-modal');
+    const acceptTermsModalBtn = document.getElementById('accept-terms-modal');
+    const nameOptions = document.querySelectorAll('.name-option');
+
+    // Redirect to chat if user is already logged in
+    if (localStorage.getItem('chatUsername')) {
+        window.location.href = 'index3.html';
+    }
+
+    // --- Modal Control Functions ---
+    function showModal(modalElement) {
+        modalElement.classList.add('show');
+        if (modalElement === nameModal) {
+            usernameInput.focus();
+        }
+    }
+
+    function hideModal(modalElement) {
+        modalElement.classList.remove('show');
+    }
+
+    // --- Event Handlers ---
+    loginBtn.addEventListener('click', () => {
+        showModal(nameModal);
+    });
+
+    // Handle name options autofill
+    nameOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            usernameInput.value = option.textContent;
+            // Visually select the clicked option
+            nameOptions.forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+        });
+    });
+
+    confirmNameModalBtn.addEventListener('click', () => {
+        const username = usernameInput.value.trim();
+        if (username) {
+            localStorage.setItem('chatUsername', username);
+            hideModal(nameModal);
+            showModal(termsModal);
+        } else {
+            nameError.textContent = 'Please enter your name to continue.';
+            nameError.classList.add('show');
+            usernameInput.focus();
+        }
+    });
+
+    cancelNameModalBtn.addEventListener('click', () => {
+        hideModal(nameModal);
+        usernameInput.value = '';
+        nameError.classList.remove('show');
+        nameOptions.forEach(opt => opt.classList.remove('selected'));
+    });
+
+    // Handle form submission on Enter key
+    usernameInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            confirmNameModalBtn.click();
+        }
+    });
+
+    acceptTermsModalBtn.addEventListener('click', () => {
+        hideModal(termsModal);
+        window.location.href = 'index2.html';
+    });
+
+    // Allow closing name modal by clicking outside
+    nameModal.addEventListener('click', (event) => {
+        if (event.target === nameModal) {
+            hideModal(nameModal);
+            usernameInput.value = '';
+            nameError.classList.remove('show');
+            nameOptions.forEach(opt => opt.classList.remove('selected'));
+        }
+    });
+</script>
+
+</body>
+</html>
