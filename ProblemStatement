@@ -1,0 +1,24 @@
+🧩 Problem Statement
+In many situations, people need to exchange messages, notes, or media between two devices without relying on SIM cards, phone numbers, or traditional messaging apps like WhatsApp.
+Common scenarios include:
+A phone without a SIM card (used by kids, seniors, or as a secondary device)
+No desire to share personal phone numbers
+WhatsApp or other messaging services not working
+Need for a lightweight, private, internet-only chat
+
+
+💡 My Personal Problem (Why I Built VibeCodez)
+My younger sister has a phone, but no SIM card. We have Wi-Fi at home, so I thought that should be enough.
+
+However, all her school notes and updates come to my mom's phone on WhatsApp, since that's the number teachers have added to the group. Both my parents work full-time, so forwarding messages or rewriting notes becomes difficult and delayed.
+
+So I decided to build VibeCodez—a simple Progressive Web App (PWA) that works on any device, with or without a SIM, as long as there’s Wi-Fi.
+
+My mom can now send the notes whenever she’s free, and my sister can open the app and read them in real-time or whenever she wants.
+
+✅ No SIM
+✅ No WhatsApp forwarding mess
+✅ No delays
+✅ Just easy note sharing between two connected devices
+
+This isn't just an app—it's a personal fix to a real problem I faced at home. And if it helps others in similar situations, even better.
